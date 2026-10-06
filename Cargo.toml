@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "fluxcache",
+    "fluxcache-client",
+    "fluxcache-bench"
+]

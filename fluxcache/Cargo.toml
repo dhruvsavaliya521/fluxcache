@@ -1,0 +1,77 @@
+[package]
+name = "fluxcache"
+version = "0.1.0"
+edition = "2021"
+authors = ["Dhruv"]
+description = "A high-performance, production-style cache server written in Rust"
+license = "MIT"
+readme = "README.md"
+
+[[bin]]
+name = "fluxcache"
+path = "src/main.rs"
+
+[lib]
+name = "fluxcache"
+path = "src/lib.rs"
+
+[dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Byte buffers
+bytes = "1"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Logging / tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# Metrics
+prometheus = "0.13"
+
+# HTTP (admin API + metrics endpoint)
+hyper = { version = "1", features = ["server", "http1"] }
+hyper-util = { version = "0.1", features = ["tokio", "server-auto", "http1"] }
+http-body-util = "0.1"
+
+# Hashing
+xxhash-rust = { version = "0.8", features = ["xxh3"] }
+
+# CRC for WAL checksums
+crc32fast = "1"
+
+# Config file
+toml = "0.8"
+
+# Timestamp
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID for request IDs
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["async_tokio"] }
+proptest = "1"
+tempfile = "3"
+tokio-test = "0.4"
+rand = "0.8"
+
+[[bench]]
+name = "cache_bench"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1

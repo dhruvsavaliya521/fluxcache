@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  fluxcache-node1:
+    build: .
+    image: fluxcache:latest
+    ports:
+      - "6380:6380"
+      - "9090:9090"
+    volumes:
+      - node1-data:/data
+    command: >
+      --listen 0.0.0.0:6380
+      --admin-listen 0.0.0.0:9090
+      --data-dir /data
+      --persistence
+      --max-memory 256mb
+      --eviction-policy lru
+
+  fluxcache-node2:
+    image: fluxcache:latest
+    ports:
+      - "6381:6380"
+      - "9091:9090"
+    volumes:
+      - node2-data:/data
+    command: >
+      --listen 0.0.0.0:6380
+      --admin-listen 0.0.0.0:9090
+      --data-dir /data
+      --persistence
+      --max-memory 256mb
+      --eviction-policy lru
+
+  fluxcache-node3:
+    image: fluxcache:latest
+    ports:
+      - "6382:6380"
+      - "9092:9090"
+    volumes:
+      - node3-data:/data
+    command: >
+      --listen 0.0.0.0:6380
+      --admin-listen 0.0.0.0:9090
+      --data-dir /data
+      --persistence
+      --max-memory 256mb
+      --eviction-policy lru
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:

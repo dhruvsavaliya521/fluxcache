@@ -1,0 +1,18 @@
+[package]
+name = "fluxcache-client"
+version = "0.1.0"
+edition = "2021"
+authors = ["Dhruv"]
+description = "Async Rust client for FluxCache"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+bytes = "1"
+thiserror = "2"
+xxhash-rust = { version = "0.8", features = ["xxh3"] }
+deadpool = "0.10"
+async-trait = "0.1"
+
+[dev-dependencies]
+fluxcache = { path = "../fluxcache" }
+tokio-test = "0.4"
